@@ -3,6 +3,7 @@ package com.example.myproject.mydiallog
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
+import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -13,8 +14,10 @@ class mydialog(context:Context):Dialog(context) {
    // override fun create() {
     //    super.create()
         //找到视图
-    init {
+     override fun onCreate(savedINstanceState:Bundle?)
+   {
        setContentView(R.layout.dialog_custom)
+       //不会出现这个为空的情况
        val tvTitle=findViewById<TextView>(R.id.tvTitle)
        val etUsername=findViewById<EditText>(R.id.etUsername)
        val myconfirm=findViewById<Button>(R.id.confirm)
