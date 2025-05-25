@@ -26,7 +26,7 @@ import com.example.myproject.mydiallog.mydialog
 class mypagefragment:Fragment() {
     private var velocityTracker: VelocityTracker? = null
     private lateinit var popWindow: MypopupWindow // 成员变量
-
+    private var mdialog:mydialog?=null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,19 +39,22 @@ class mypagefragment:Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         velocityTracker = VelocityTracker.obtain() // 初始化
-        val mydialog=mydialog(requireContext())
-        mydialog.setListener(object: mydialog.myListener{
+        mdialog=mydialog(requireContext())
+        val  mybuttom=view.findViewById<Button>(R.id.mybut)
+        val   mybuttom2=view.findViewById<Button>(R.id.mybut1)
+        mdialog?.setListener(object: mydialog.myListener{
             override fun onCancle() {
+
                 Log.d("haha","oncancle")
             }
 
             override fun onConfirm() {
                 Log.d("haha","onConfirm")
+                //强引用了
+                mybuttom2.text="onConfirm"
 
             }
         })
-        val  mybuttom=view.findViewById<Button>(R.id.mybut)
-        val   mybuttom2=view.findViewById<Button>(R.id.mybut1)
 
         //1。需要父亲能够接收消息
         //在父亲这里创建handelr,父亲默认绑定了looper
@@ -83,16 +86,13 @@ class mypagefragment:Fragment() {
         }
         mybuttom?.setOnClickListener {
             Log.d("rizhi","我点击了")
-            mydialog.show()
+            mdialog?.show()
 
             //2。创建线程给父亲发送消息
             val thread=Thread{
                 Thread.sleep(10000)
                  handler.sendMessage(handler.obtainMessage(1))
             }.start()
-
-
-
         }
         val mylist: List<Mydata> = listOf(
             Mydata("haha1",1),
@@ -184,6 +184,8 @@ class mypagefragment:Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         popWindow.dismiss()
+        mdialog?.dismiss()
+        mdialog=null
     }
 
 }
