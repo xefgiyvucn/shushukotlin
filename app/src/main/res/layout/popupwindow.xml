@@ -1,0 +1,36 @@
+<!-- 圆角背景 + 阴影 -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="250dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- 标题 -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="自定义弹窗"
+        android:textSize="18sp"
+        android:textColor="#333"
+        android:gravity="center"/>
+
+    <!-- 内容 -->
+    <TextView
+        android:id="@+id/tvContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="这是一个高度定制的PopupWindow"
+        android:textColor="#666"
+        android:layout_marginTop="8dp"/>
+
+    <!-- 操作按钮 -->
+    <Button
+        android:id="@+id/btnClose"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="关闭"
+        android:layout_marginTop="16dp" />
+
+</LinearLayout>

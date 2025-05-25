@@ -11,8 +11,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.myproject.R
 import com.example.myproject.adapter.MyrecycleAdapter
@@ -20,15 +18,15 @@ import com.example.myproject.model.Mydata
 import kotlin.math.abs
 import android.view.VelocityTracker
 import android.widget.Button
-import java.lang.Thread.sleep
 import android.os.Handler
 import android.os.Looper
-import android.os.Message
-import android.widget.Toast
+import com.example.myproject.mydiallog.MypopupWindow
 import com.example.myproject.mydiallog.mydialog
 
 class mypagefragment:Fragment() {
     private var velocityTracker: VelocityTracker? = null
+    private lateinit var popWindow: MypopupWindow // 成员变量
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -53,6 +51,7 @@ class mypagefragment:Fragment() {
             }
         })
         val  mybuttom=view.findViewById<Button>(R.id.mybut)
+        val   mybuttom2=view.findViewById<Button>(R.id.mybut1)
 
         //1。需要父亲能够接收消息
         //在父亲这里创建handelr,父亲默认绑定了looper
@@ -75,6 +74,13 @@ class mypagefragment:Fragment() {
         var startX=0f
         var startY=0f
         val touchSlop=ViewConfiguration.get(requireContext()).scaledTouchSlop
+        var popWindow=MypopupWindow(this)
+
+        mybuttom2?.setOnClickListener {
+            //创建一个popupWindow
+            popWindow.show(it)
+
+        }
         mybuttom?.setOnClickListener {
             Log.d("rizhi","我点击了")
             mydialog.show()
@@ -173,6 +179,11 @@ class mypagefragment:Fragment() {
         val layoutManager = LinearLayoutManager(requireContext())
         layoutManager.orientation = LinearLayoutManager.HORIZONTAL
         recyclerView.layoutManager=layoutManager
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        popWindow.dismiss()
     }
 
 }
