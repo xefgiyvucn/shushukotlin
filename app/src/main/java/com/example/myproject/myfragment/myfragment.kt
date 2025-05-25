@@ -25,7 +25,7 @@ class myfragment:Fragment() {
             //默认选中第一个
              topnav.selectedItemId=R.id.nav_tophome1
              //实例化对象
-           var mytopfragment=mytopfragment()
+            var mytopfragment=mytopfragment()
              //手动进行替换
            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.myTabswitch,mytopfragment)?.commit()
             //创建监听器

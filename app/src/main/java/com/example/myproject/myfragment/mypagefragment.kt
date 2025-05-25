@@ -24,6 +24,9 @@ import java.lang.Thread.sleep
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
+import android.widget.Toast
+import com.example.myproject.mydiallog.mydialog
+
 class mypagefragment:Fragment() {
     private var velocityTracker: VelocityTracker? = null
     override fun onCreateView(
@@ -38,7 +41,17 @@ class mypagefragment:Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         velocityTracker = VelocityTracker.obtain() // 初始化
+        val mydialog=mydialog(requireContext())
+        mydialog.setListener(object: mydialog.myListener{
+            override fun onCancle() {
+                Log.d("haha","oncancle")
+            }
 
+            override fun onConfirm() {
+                Log.d("haha","onConfirm")
+
+            }
+        })
         val  mybuttom=view.findViewById<Button>(R.id.mybut)
 
         //1。需要父亲能够接收消息
@@ -64,15 +77,17 @@ class mypagefragment:Fragment() {
         val touchSlop=ViewConfiguration.get(requireContext()).scaledTouchSlop
         mybuttom?.setOnClickListener {
             Log.d("rizhi","我点击了")
+            mydialog.show()
+
             //2。创建线程给父亲发送消息
             val thread=Thread{
                 Thread.sleep(10000)
                  handler.sendMessage(handler.obtainMessage(1))
             }.start()
 
+
+
         }
-
-
         val mylist: List<Mydata> = listOf(
             Mydata("haha1",1),
             Mydata("haha2",1),

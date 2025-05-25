@@ -15,5 +15,12 @@
         android:id="@+id/mybut"
         android:text="h"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/mybut1"
+        android:text="w"/>
+
+
 
 </LinearLayout>
