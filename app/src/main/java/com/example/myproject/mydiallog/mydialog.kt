@@ -1,13 +1,11 @@
 package com.example.myproject.mydiallog
 
-import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import com.example.myproject.R
 import java.lang.ref.WeakReference
 
@@ -52,7 +50,7 @@ class mydialog(context:Context):Dialog(context) {
     private var mylistener: WeakReference<myListener>? =null
 
     //设置回调方法
-    public  fun setListener(listen:myListener)
+    public  fun setListener(listen: myListener?)
     {
         this.mylistener=WeakReference(listen)
     }

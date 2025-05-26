@@ -25,7 +25,7 @@ import com.example.myproject.mydiallog.mydialog
 
 class mypagefragment:Fragment() {
     private var velocityTracker: VelocityTracker? = null
-    private lateinit var popWindow: MypopupWindow // 成员变量
+    private  var popWindow: MypopupWindow?=null // 成员变量
     private var mdialog:mydialog?=null
     private var dialogListener:mydialog.myListener?=null
 
@@ -52,7 +52,6 @@ class mypagefragment:Fragment() {
 
             override fun onConfirm() {
                 Log.d("haha","onConfirm")
-                //强引用了
                 mybuttom2.text="onConfirm"
 
             }
@@ -74,16 +73,16 @@ class mypagefragment:Fragment() {
         }
         //可以进行ui组件的初始化
       // 在 mypagefragment 中
-        val viewpager2 = (parentFragment as? mytopfragment)?.view?.findViewById<ViewPager2>(R.id.mviewpager)        //先保存起始位置
-        if(viewpager2==null) return
+        val viewpager2 = (parentFragment as? mytopfragment)?.view?.findViewById<ViewPager2>(R.id.mviewpager)
+      //  if(viewpager2==null) return
         var startX=0f
         var startY=0f
         val touchSlop=ViewConfiguration.get(requireContext()).scaledTouchSlop
-        var popWindow=MypopupWindow(this)
+         popWindow=MypopupWindow(this)
 
         mybuttom2?.setOnClickListener {
             //创建一个popupWindow
-            popWindow.show(it)
+            popWindow?.show(it)
 
         }
         mybuttom?.setOnClickListener {
@@ -185,7 +184,7 @@ class mypagefragment:Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        popWindow.dismiss()
+        popWindow?.dismiss()
         mdialog?.dismiss()
         mdialog=null
     }
