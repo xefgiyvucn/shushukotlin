@@ -27,7 +27,9 @@ class mypagefragment:Fragment() {
     private var velocityTracker: VelocityTracker? = null
     private lateinit var popWindow: MypopupWindow // 成员变量
     private var mdialog:mydialog?=null
-    override fun onCreateView(
+    private var dialogListener:mydialog.myListener?=null
+
+        override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,7 +44,7 @@ class mypagefragment:Fragment() {
         mdialog=mydialog(requireContext())
         val  mybuttom=view.findViewById<Button>(R.id.mybut)
         val   mybuttom2=view.findViewById<Button>(R.id.mybut1)
-        mdialog?.setListener(object: mydialog.myListener{
+        dialogListener=object: mydialog.myListener{
             override fun onCancle() {
 
                 Log.d("haha","oncancle")
@@ -54,8 +56,8 @@ class mypagefragment:Fragment() {
                 mybuttom2.text="onConfirm"
 
             }
-        })
-
+        }
+        mdialog?.setListener(dialogListener as mydialog.myListener)
         //1。需要父亲能够接收消息
         //在父亲这里创建handelr,父亲默认绑定了looper
         val handler=Handler(Looper.getMainLooper()) {
